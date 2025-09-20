@@ -158,7 +158,7 @@ for d in d_blocked:
                         y_stack[i * m: (i + 1) * m] = y_stack[i * m: (i + 1) * m] + noise_add
                     # y_stack=y_stack+noise_add
 
-                    '''
+                    
                     # compute the combination function
                     print("VPD-JSM1 Algorithm")
                     avr_com_mse[3, t1 * num_x * num_v + t2 * num_v + t3], avr_loc_mse[3,
@@ -188,150 +188,17 @@ for d in d_blocked:
                                                                              t1 * num_x * num_v + t2 * num_v + t3, :]\
                         = ADMM_function.baseline_JSM1(a_stack, y_stack, X_est, v_stack, N, Adjacent_Matrix, c, rho,
                                                       gamma1, gamma2, gamma3, Max_iter)
-                    '''
+                    
                     print("the standard algorithm")
                     avr_com_mse[4, t1 * num_x * num_v + t2 * num_v + t3, :], avr_loc_mse[4,
                                                                              t1 * num_x * num_v + t2 * num_v + t3, :] \
                         = ADMM_function.stand_DLasso(a_stack, y_stack, X_est, v_stack, N, Adjacent_Matrix, cs, gammas, Max_iter)
-                    # for j in range(num_compare):
-                    j=4
-                    np.savetxt(
-                            './new_m_compareall_noise/convergence2/d%d' % d + '/%d_' % m + 'avr_com_mse%d.txt' % j,
-                            avr_com_mse[j, :, :])
-                    np.savetxt(
-                            './new_m_compareall_noise/convergence2/d%d' % d + '/%d_' % m + 'avr_loc_mse%d.txt' % j,
-                            avr_loc_mse[j, :, :])
-
-
-M = [60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160]
-avr_c0 = np.zeros((len(d_blocked), len(M)))
-avr_l0 = np.zeros((len(d_blocked), len(M)))
-avr_c1 = np.zeros((len(d_blocked), len(M)))
-avr_l1 = np.zeros((len(d_blocked), len(M)))
-avr_c2 = np.zeros((len(d_blocked), len(M)))
-avr_l2 = np.zeros((len(d_blocked), len(M)))
-avr_c3 = np.zeros((len(d_blocked), len(M)))
-avr_l3 = np.zeros((len(d_blocked), len(M)))
-avr_c4 = np.zeros((len(d_blocked), len(M)))
-avr_l4 = np.zeros((len(d_blocked), len(M)))
-
-cserr0 = np.zeros((len(d_blocked), len(M)))
-cserr1 = np.zeros((len(d_blocked), len(M)))
-cserr2 = np.zeros((len(d_blocked), len(M)))
-cserr3 = np.zeros((len(d_blocked), len(M)))
-cserr4 = np.zeros((len(d_blocked), len(M)))
-
-for j in range(len(d_blocked)):
-    for i in range(len(M)):
-        m = M[i]
-        d = d_blocked[j]
-        avr_cc0 = np.loadtxt('./new_m_compareall_noise/convergence/d%d' % d + '/%d_' % m + 'avr_com_mse0.txt')
-        avr_ll0 = np.loadtxt('./new_m_compareall_noise/convergence/d%d' % d + '/%d_' % m + 'avr_loc_mse0.txt')
-        # cserr00 = np.loadtxt('./new_d_compareall_noise/convergence3/d%d' % d + '/%d_' % m + 'cserr0.txt')
-
-        avr_cc1 = np.loadtxt('./new_m_compareall_noise/convergence/d%d' % d + '/%d_' % m + 'avr_com_mse1.txt')
-        avr_ll1 = np.loadtxt('./new_m_compareall_noise/convergence/d%d' % d + '/%d_' % m + 'avr_loc_mse1.txt')
-        # cserr11 = np.loadtxt('./new_d_compareall_noise/convergence3/d%d' % d + '/%d_' % m + 'cserr1.txt')
-
-        avr_cc2 = np.loadtxt('./new_m_compareall_noise/convergence/d%d' % d + '/%d_' % m + 'avr_com_mse2.txt')
-        avr_ll2 = np.loadtxt('./new_m_compareall_noise/convergence/d%d' % d + '/%d_' % m + 'avr_loc_mse2.txt')
-        # cserr22 = np.loadtxt('./new_d_compareall_noise/convergence3/d%d' % d + '/%d_' % m + 'cserr2.txt')
-
-        avr_cc3 = np.loadtxt('./new_m_compareall_noise/convergence/d%d' % d + '/%d_' % m + 'avr_com_mse3.txt')
-        avr_ll3 = np.loadtxt('./new_m_compareall_noise/convergence/d%d' % d + '/%d_' % m + 'avr_loc_mse3.txt')
-        # cserr33 = np.loadtxt('./new_d_compareall_noise/convergence3/d%d' % d + '/%d_' % m + 'cserr3.txt')
-
-        avr_cc4 = np.loadtxt('./new_m_compareall_noise/convergence2/d%d' % d + '/%d_' % m + 'avr_com_mse4.txt')
-        avr_ll4 = np.loadtxt('./new_m_compareall_noise/convergence2/d%d' % d + '/%d_' % m + 'avr_loc_mse4.txt')
-
-        avr_c0[j, i] = np.average(avr_cc0[:, 0])  #:,
-        avr_l0[j, i] = np.average(avr_ll0[:, 0])
-        # cserr0[j, i] = np.average(cserr00[:, 0])
-
-        avr_c1[j, i] = np.average(avr_cc1[:, Max_iter - 1])
-        avr_l1[j, i] = np.average(avr_ll1[:, Max_iter - 1])
-        # cserr1[j, i] = np.average(cserr11[:,Max_iter - 1])
-
-        avr_c2[j, i] = np.average(avr_cc2[:, Max_iter - 1])
-        avr_l2[j, i] = np.average(avr_ll2[:, Max_iter - 1])
-        # cserr2[j, i] = np.average(cserr22[:, Max_iter - 1])
-
-        avr_c3[j, i] = np.average(avr_cc3[:, Max_iter - 1])
-        avr_l3[j, i] = np.average(avr_ll3[:, Max_iter - 1])
-        # cserr3[j, i] = np.average(cserr33[:, Max_iter - 1])
-
-        avr_c4[j, i] = np.average(avr_cc4[:, Max_iter - 1])
-        avr_l4[j, i] = np.average(avr_ll4[:, Max_iter - 1])
-
-        '''
-        avr_c0[j, i] = np.average(avr_cc0[0])  #:,
-        avr_l0[j, i] = np.average(avr_ll0[0])
-        cserr0[j, i] = np.average(cserr00[0])
-
-        avr_c1[j, i] = np.average(avr_cc1[Max_iter - 1])
-        avr_l1[j, i] = np.average(avr_ll1[Max_iter - 1])
-        cserr1[j, i] = np.average(cserr11[Max_iter - 1])
-
-        avr_c2[j, i] = np.average(avr_cc2[Max_iter - 1])
-        avr_l2[j, i] = np.average(avr_ll2[Max_iter - 1])
-        cserr2[j, i] = np.average(cserr22[Max_iter - 1])
-
-        avr_c3[j, i] = np.average(avr_cc3[Max_iter - 1])
-        avr_l3[j, i] = np.average(avr_ll3[Max_iter - 1])
-        cserr3[j, i] = np.average(cserr33[Max_iter - 1])
-        '''
-
-X = M
-figure1 = plt.figure(1)
-plt.plot(X, avr_c0[0, :], linewidth=2, label="IRAS(p=0.2)", color='b', linestyle='-', marker='o')
-plt.plot(X, avr_c2[0, :], linewidth=2, label="D-AJSM(p=0.2)", color='r', linestyle=':', marker='>')
-plt.plot(X, avr_c1[0, :], linewidth=2, label="VPD-ADMM(p=0.2)", color='g', linestyle='-.', marker='*')
-plt.plot(X, avr_c3[0, :], linewidth=2, label="VPD-EC(p=0.2)", color='y', linestyle='--', marker='s')
-plt.plot(X, avr_c4[0, :], linewidth=2, label="Stand(p=0.2)", color='gray', linestyle='--', marker='<')
-plt.xlim(min(M), max(M))
-plt.ylim(0, 0.12)
-# plt.title("avr_com_mse")
-plt.xlabel("M")
-plt.ylabel("avr_Glo_mse")
-plt.grid(True)
-plt.legend()
-
-figure2 = plt.figure(2)
-plt.plot(X, avr_l0[0, :], linewidth=2, label="IRAS(p=0.2)", color='b', linestyle='-', marker='o')
-plt.plot(X, avr_l2[0, :], linewidth=2, label="D-AJSM(p=0.2)", color='r', linestyle=':', marker='>')
-plt.plot(X, avr_l1[0, :], linewidth=2, label="VPD-ADMM(p=0.2)", color='g', linestyle='-.', marker='*')
-plt.plot(X, avr_l3[0, :], linewidth=2, label="VPD-EC(p=0.2)", color='y', linestyle='--', marker='s')
-plt.plot(X, avr_l4[0, :], linewidth=2, label="Stand(p=0.2)", color='gray', linestyle='--', marker='<')
-plt.xlim(min(M), max(M))
-plt.ylim(0, 0.08)
-# plt.title("avr_loc_mse")
-plt.xlabel("M")
-plt.ylabel("avr_Loc_mse")
-plt.grid(True)
-plt.legend()
-'''
-figure3=plt.figure(3)
-plt.plot(X, cserr0[0, :], linewidth=2, label="BL(d=%d)"%d_blocked[0], color='b', linestyle='-', marker='o')
-# plt.plot(X, cserr0[1, :], linewidth=2, label="BL(d=%d)"%d_blocked[1], color='r', linestyle='-', marker='>')
-# plt.plot(X, cserr0[2, :], linewidth=2, label="BL(d=%d)"%d_blocked[2], color='g', linestyle='-', marker='o')
-
-plt.plot(X, cserr1[0, :], linewidth=2, label="ADMMVPD(d=%d)"%d_blocked[0], color='g', linestyle='-.', marker='*')
-# plt.plot(X, cserr1[1, :], linewidth=2, label="ADMMVPD(d=%d)"%d_blocked[1], color='r', linestyle='-.', marker='>')
-# plt.plot(X, cserr1[2, :], linewidth=2, label="ADMMVPD(d=%d)"%d_blocked[2], color='g', linestyle='-.', marker='o')
-# plt.plot(X, ratio_c1[3, :], linewidth=2, label="ADMMVPD(d=20)", color='c', linestyle='-.', marker='+')
-# plt.plot(X, ratio_c1[4, :], linewidth=2, label="ADMMVPD(d=25)", color='m', linestyle='-.', marker='s')
-# plt.plot(X, avr_loc_mse_s[3, :], linewidth=2, label="ADMMOGD(beta=1.6)", color='g', linestyle=':')
-# plt.yscale('log')
-
-plt.plot(X, cserr2[0, :], linewidth=2, label="JSM1(d=%d)"%d_blocked[0], color='r', linestyle='-.', marker='>')
-
-plt.plot(X, cserr3[0, :], linewidth=2, label="VPD-JSM1(d=%d)"%d_blocked[0], color='y', linestyle='-.', marker='+')
-
-plt.title("Consenus Error")
-plt.xlabel("M")
-plt.ylabel("cserr")
-plt.grid(True)
-plt.legend()
-'''
-plt.show()
+                  
+                    for j in range(num_compare):
+                      np.savetxt(
+                              './new_m_compareall_noise/convergence2/d%d' % d + '/%d_' % m + 'avr_com_mse%d.txt' % j,
+                              avr_com_mse[j, :, :])
+                      np.savetxt(
+                              './new_m_compareall_noise/convergence2/d%d' % d + '/%d_' % m + 'avr_loc_mse%d.txt' % j,
+                              avr_loc_mse[j, :, :])
 
