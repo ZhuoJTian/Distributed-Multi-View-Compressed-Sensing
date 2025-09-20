@@ -4,17 +4,12 @@ import ADMM_function
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 
-#20, 30, 40, 50, 60
-# 40, 50, 60, 70, 80, 90,
-# [30, 50, 70, 90, 110]  #40, 60, 80, 100, 120
-    #[20, 30, 40, 50, 60, 70, 80, 90] # the measurement size in each sensor
-# M=[20, 40, 60, 80, 100, 120, 140, 160, 180]
-# M=[40, 60, 80, 100, 120, 140] #10  #, 140, 160, 180,  200, 100, 120, 140
+
 m=100
 T=500
 N=6
 K=50
-d_blocked=[40] #0, 5, 10, 15, 20, 25, 30, 35, 40  # 5和10， 15, 20, 25都跑过了
+d_blocked=[0, 5, 10, 15, 20, 25, 30, 35, 40] 
 # 先仿真16个看
 num_a=2   #2,2,4;  5,2,4
 num_x=2
@@ -32,17 +27,6 @@ Max_iter=100
 num_compare=5
 USTp=35
 Umin=20
-
-# fix the parameter of JSM1
-'''
-c=0.05
-gamma1=0.01
-gamma2=0.5
-gamma3=0.02
-rho=0.05
-'''
-
-
 
 for d in d_blocked:
     if d == 0:
@@ -239,16 +223,6 @@ for d in d_blocked:
     avr_com_mse = np.zeros((num_compare, repeat_times))
     avr_loc_mse = np.zeros((num_compare, repeat_times))
     maxiter = np.zeros((num_compare, repeat_times))
-    # a1 = np.loadtxt('./new_d_compareall_noise/convergence3/d%d' % d + '/avr_com_mse2.txt')
-    # a2 = np.loadtxt('./new_d_compareall_noise/convergence3/d%d' % d + '/avr_loc_mse2.txt')
-    # b1 = np.loadtxt('./new_d_compareall_noise/convergence1/d%d' % d + '/avr_com_mse2.txt')
-    # b2 = np.loadtxt('./new_d_compareall_noise/convergence1/d%d' % d + '/avr_loc_mse2.txt')
-    '''
-    for j in range(num_compare):
-        avr_com_mse[j, 0:16] = np.loadtxt(
-            './new_d_compareall_noise/convergence/d%d' % d + '_avr_com_mse%d.txt' % j)[0:16]
-        avr_loc_mse[j, 0:16] = np.loadtxt(
-            './new_d_compareall_noise/convergence/d%d' % d + '_avr_loc_mse%d.txt' % j)[0:16]'''
 
     # import data
     for t1 in range(num_a):
@@ -270,10 +244,6 @@ for d in d_blocked:
                     y_stack[i * m: (i + 1) * m] = y_stack[i * m: (i + 1) * m] + noise_add
                     # y_stack=y_stack+noise_add
 
-                # Baseline2 _JSM1
-                # print("the JSM1 algorithm: %.4f," %a1[t1 * num_x * num_v + t2 * num_v + t3]+" %.4f"%a2[t1 * num_x * num_v + t2 * num_v + t3])
-                # print("the JSM1 algorithm: %.4f," %b1[t1 * num_x * num_v + t2 * num_v + t3]+" %.4f"%b2[t1 * num_x * num_v + t2 * num_v + t3])
-                '''
                 print("the Initial BSL:\n")
                 # compute the base line
                 avr_com_mse[0, t1 * num_x * num_v + t2 * num_v + t3], avr_loc_mse[
@@ -300,7 +270,7 @@ for d in d_blocked:
                                                                                   t1 * num_x * num_v + t2 * num_v + t3] \
                     = ADMM_function.ADMM_VPD_JSM1_ind(a_stack, y_stack, X_est, v_stack, N, Adjacent_Matrix, alpha,
                                                       c22, rho2, gamma12, gamma22, gamma32,
-                                                      c2, gamma_new, Max_iter, eta, USTp, Umin)'''
+                                                      c2, gamma_new, Max_iter, eta, USTp, Umin)
 
                 print("the standard algorithm")
                 avr_com_mse[4, t1 * num_x * num_v + t2 * num_v + t3], avr_loc_mse[4,
@@ -308,13 +278,11 @@ for d in d_blocked:
                     = ADMM_function.stand_DLasso(a_stack, y_stack, X_est, v_stack, N, Adjacent_Matrix, cs, gammas,
                                                  Max_iter)
 
-                # print("a")
-                #  for j in range(num_compare):
-                j=4
-                np.savetxt('./new_d_compareall_noise/glo/convergence2/d%d/' % d + 'avr_com_mse%d.txt' % j,
-                               avr_com_mse[j, :])
-                np.savetxt('./new_d_compareall_noise/glo/convergence2/d%d/' % d + 'avr_loc_mse%d.txt' % j,
-                               avr_loc_mse[j, :])
+                for j in range(num_compare):
+                    np.savetxt('./new_d_compareall_noise/glo/convergence2/d%d/' % d + 'avr_com_mse%d.txt' % j,
+                                   avr_com_mse[j, :])
+                    np.savetxt('./new_d_compareall_noise/glo/convergence2/d%d/' % d + 'avr_loc_mse%d.txt' % j,
+                                   avr_loc_mse[j, :])
 
 
 
@@ -413,4 +381,5 @@ plt.grid(True)
 plt.legend(prop=font2)
 
 plt.show()
+
 
