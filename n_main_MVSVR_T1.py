@@ -79,7 +79,7 @@ for b in B_one:
                         = AD.decentral_l1_VR_penalty_c_ind_hard(a_stack, y_stack, X_est, v_stack, N, M_list,
                                                             Adjacent_Matrix, alpha, c2, gamma_new,
                                                             Max_iter, eta, USTp, Umin)
-                    '''
+                    
                     print("the Initial BSL:\n")
                     # compute the base line
                     avr_com_mse[0, t1 * num_x * num_v + t2 * num_v + t3], avr_loc_mse[0, t1 * num_x * num_v + t2 * num_v + t3]\
@@ -102,11 +102,12 @@ for b in B_one:
                     # print("a")
                     print("the standard algorithm")
                     avr_com_mse[4, t1 * num_x * num_v + t2 * num_v + t3], avr_loc_mse[4, t1 * num_x * num_v + t2 * num_v + t3] \
-                                = AD.stand_DLasso(a_stack, y_stack, X_est, v_stack, N, M_list, Adjacent_Matrix, cs, gammas, Max_iter)'''
+                                = AD.stand_DLasso(a_stack, y_stack, X_est, v_stack, N, M_list, Adjacent_Matrix, cs, gammas, Max_iter)
 
-                    # for j in range(num_compare):
-                    np.savetxt('./new_T1/convergence/%d/' %b + 'avr_com_mse%d.txt' % mi,
-                                    avr_com_mse[mi, :])
-                    np.savetxt('./new_T1/convergence/%d/' %b + 'avr_loc_mse%d.txt' % mi,
-                                    avr_loc_mse[mi, :])
+                    for j in range(num_compare):
+                      np.savetxt('./new_T1/convergence/%d/' %b + 'avr_com_mse%d.txt' % mi,
+                                      avr_com_mse[mi, :])
+                      np.savetxt('./new_T1/convergence/%d/' %b + 'avr_loc_mse%d.txt' % mi,
+                                      avr_loc_mse[mi, :])
+
 
