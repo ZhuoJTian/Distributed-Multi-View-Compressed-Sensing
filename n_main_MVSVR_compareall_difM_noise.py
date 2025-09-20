@@ -4,14 +4,8 @@ import ADMM_function
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 
-# 20, 30, 40, 50, 60
-# 40, 50, 60, 70, 80, 90,
-# [30, 50, 70, 90, 110]  #40, 60, 80, 100, 120
-# [20, 30, 40, 50, 60, 70, 80, 90] # the measurement size in each sensor
-# M=[20, 40, 60, 80, 100, 120, 140, 160, 180]
-# M=[40, 60, 80, 100, 120, 140] #10  #, 140, 160, 180,  200, 100, 120, 140
-M = [60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160]# [60, 70, 80, 90, 100, 110, 120, 130, 140, 150]  #这样的话60,70, 80，90,100全都跑了40次，需要再跑40-16的是110， 130， 150
-# [60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160]  # 40不要啦  60.80.100, 120, done
+
+M = [60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160]
 # 60.70 for Standard is
 T = 500
 N = 6
@@ -195,7 +189,6 @@ for d in d_blocked:
                         = ADMM_function.baseline_JSM1(a_stack, y_stack, X_est, v_stack, N, Adjacent_Matrix, c, rho,
                                                       gamma1, gamma2, gamma3, Max_iter)
                     '''
-                    # print("a")
                     print("the standard algorithm")
                     avr_com_mse[4, t1 * num_x * num_v + t2 * num_v + t3, :], avr_loc_mse[4,
                                                                              t1 * num_x * num_v + t2 * num_v + t3, :] \
@@ -341,3 +334,4 @@ plt.grid(True)
 plt.legend()
 '''
 plt.show()
+
