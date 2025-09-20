@@ -1,5 +1,7 @@
 The implementation code for IEEE TSP paper "Distributed multi-view sparse vector recovery".
 ###
+Use data_gener.py to generate the data.
+###
 The files begin with "n_main_" is the main document to run. Replace the file address within the code, to replace the measurement matrix A, sparse signal X, and block information V.
 ###
 Cited by 
