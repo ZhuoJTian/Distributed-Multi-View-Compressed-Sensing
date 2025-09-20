@@ -4,12 +4,6 @@ import ADMM_function
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 
-# 20, 30, 40, 50, 60
-# 40, 50, 60, 70, 80, 90,
-# [30, 50, 70, 90, 110]  #40, 60, 80, 100, 120
-# [20, 30, 40, 50, 60, 70, 80, 90] # the measurement size in each sensor
-# M=[20, 40, 60, 80, 100, 120, 140, 160, 180]
-# M=[40, 60, 80, 100, 120, 140] #10  #, 140, 160, 180,  200, 100, 120, 140
 m = 100
 T = 500
 N = 6
@@ -326,3 +320,4 @@ plt.grid(False)
 plt.legend(prop=font2, loc=1)
 
 plt.show()
+
