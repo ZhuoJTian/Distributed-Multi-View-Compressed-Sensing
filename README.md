@@ -177,8 +177,6 @@ Stage 2 performs structural reorganization and conservative style cleanup. It in
 }
 ```
 
-GitHub can also read the included `CITATION.cff` file.
-
 ## License
 
 This repository currently includes the MIT License. Before public release, the repository owner should confirm that all copyright holders agree to this license.
