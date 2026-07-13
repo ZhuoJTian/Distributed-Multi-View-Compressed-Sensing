@@ -1,3 +1,8 @@
+"""Reorganized module from the original DMVCS research implementation.
+
+Numerical behavior is intentionally preserved; naming cleanup is conservative.
+"""
+
 import numpy as np
 import copy
 def shrinkage(x, a):

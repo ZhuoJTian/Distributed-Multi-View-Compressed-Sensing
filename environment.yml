@@ -1,0 +1,12 @@
+name: dmv-svr
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy>=1.23
+  - scipy>=1.9
+  - cvxpy>=1.3
+  - networkx>=2.8
+  - matplotlib>=3.6
+  - pip

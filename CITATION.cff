@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the associated IEEE Transactions on Signal Processing paper."
+title: "Distributed Multi-View Sparse Vector Recovery"
+type: software
+authors:
+  - family-names: Tian
+    given-names: Zhuojun
+  - family-names: Zhang
+    given-names: Zhaoyang
+  - family-names: Hanzo
+    given-names: Lajos
+year: 2023
+license: MIT
+preferred-citation:
+  type: article
+  title: "Distributed Multi-View Sparse Vector Recovery"
+  authors:
+    - family-names: Tian
+      given-names: Zhuojun
+    - family-names: Zhang
+      given-names: Zhaoyang
+    - family-names: Hanzo
+      given-names: Lajos
+  journal: "IEEE Transactions on Signal Processing"
+  volume: 71
+  start: 1448
+  end: 1463
+  year: 2023
