@@ -153,15 +153,6 @@ np.random.seed(42)
 
 Some experiments repeatedly solve convex optimization problems and can be computationally expensive. Solver behavior may differ across CVXPY versions and installed solver backends.
 
-## Maintenance scope
-
-Stage 2 performs structural reorganization and conservative style cleanup. It intentionally avoids changing mathematical expressions, function signatures, tuned hyperparameters, or the numerical order of operations. A later packaging stage can add:
-
-- `pyproject.toml` and `pip install .`
-- command-line arguments
-- YAML experiment configurations
-- automatic input/output directory creation
-- continuous integration, linting, and broader tests
 
 ## Citation
 
